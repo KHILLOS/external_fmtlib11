@@ -1,0 +1,51 @@
+package {
+    default_applicable_licenses: ["external_fmtlib11_license"],
+}
+
+license {
+    name: "external_fmtlib11_license",
+    license_kinds: ["SPDX-license-identifier-MIT"],
+    license_text: ["LICENSE.rst"],
+}
+
+cc_defaults {
+    name: "fmtlib11_defaults",
+    cflags: [
+        "-fno-exceptions",
+        "-UNDEBUG",
+    ],
+    cpp_std: "gnu++14",
+}
+
+cc_library_headers {
+    name: "fmtlib11_headers",
+    export_include_dirs: ["include"],
+    vendor_available: true,
+    host_supported: true,
+    apex_available: true,
+    visibility: [
+        "//external/spdlog",
+    ],
+}
+
+cc_library_static {
+    name: "fmtlib11",
+    defaults: ["fmtlib11_defaults"],
+    srcs: ["src/format.cc", "src/os.cc"],
+    export_include_dirs: ["include"],
+    vendor_available: true,
+    host_supported: true,
+    apex_available: true,
+}
+
+cc_library_static {
+    name: "fmtlib11_ndk",
+    defaults: ["fmtlib11_defaults"],
+    srcs: ["src/format.cc", "src/os.cc"],
+    export_include_dirs: ["include"],
+    vendor_available: true,
+    host_supported: true,
+    apex_available: true,
+    stl: "c++_static",
+    sdk_version: "current",
+}
