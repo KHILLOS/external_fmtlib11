@@ -4,8 +4,15 @@ package {
 
 license {
     name: "external_fmtlib11_license",
-    license_kinds: ["SPDX-license-identifier-MIT"],
-    license_text: ["LICENSE.rst"],
+    visibility: [":__subpackages__"],
+    license_kinds: [
+        "SPDX-license-identifier-BSD",
+        "SPDX-license-identifier-CC0-1.0",
+        "SPDX-license-identifier-MIT",
+        "SPDX-license-identifier-PSF-2.0",
+        "legacy_unencumbered",
+    ],
+    license_text: ["LICENSE", "NOTICE"],
 }
 
 cc_defaults {
@@ -14,38 +21,72 @@ cc_defaults {
         "-fno-exceptions",
         "-UNDEBUG",
     ],
-    cpp_std: "gnu++14",
+    srcs: ["src/format.cc"],
+    local_include_dirs: ["include"],
+    export_include_dirs: ["include"],
+    min_sdk_version: "29",
 }
 
 cc_library_headers {
     name: "fmtlib11_headers",
     export_include_dirs: ["include"],
     vendor_available: true,
+    product_available: true,
+    ramdisk_available: true,
+    vendor_ramdisk_available: true,
+    recovery_available: true,
     host_supported: true,
-    apex_available: true,
+    native_bridge_supported: true,
+    target: {
+        linux_bionic: {
+            enabled: true,
+        },
+        windows: {
+            enabled: true,
+        },
+    },
     visibility: [
         "//external/spdlog",
+    ],
+    min_sdk_version: "29",
+    sdk_version: "current",
+    apex_available: [
+        "//apex_available:anyapex",
+        "//apex_available:platform",
     ],
 }
 
 cc_library_static {
     name: "fmtlib11",
     defaults: ["fmtlib11_defaults"],
-    srcs: ["src/format.cc", "src/os.cc"],
-    export_include_dirs: ["include"],
     vendor_available: true,
+    product_available: true,
+    ramdisk_available: true,
+    vendor_ramdisk_available: true,
+    recovery_available: true,
     host_supported: true,
-    apex_available: true,
+    native_bridge_supported: true,
+    target: {
+        linux_bionic: {
+            enabled: true,
+        },
+        windows: {
+            enabled: true,
+        },
+    },
+    apex_available: [
+        "//apex_available:anyapex",
+        "//apex_available:platform",
+    ],
+    min_sdk_version: "29",
 }
 
 cc_library_static {
     name: "fmtlib11_ndk",
     defaults: ["fmtlib11_defaults"],
-    srcs: ["src/format.cc", "src/os.cc"],
-    export_include_dirs: ["include"],
-    vendor_available: true,
-    host_supported: true,
-    apex_available: true,
-    stl: "c++_static",
     sdk_version: "current",
+    stl: "c++_static",
+    apex_available: [
+        "//apex_available:platform",
+    ],
 }
