@@ -1,0 +1,21 @@
+# This project was upgraded with external_updater.
+# Usage: tools/external_updater/updater.sh update external/fmtlib11
+# For more info, check https://cs.android.com/android/platform/superproject/main/+/main:tools/external_updater/README.md
+
+name: "fmtlib11"
+description: "fmt is an open-source formatting library for C++. It can be used as a safe alternative to printf or as a fast replacement for iostreams."
+third_party {
+  license_type: NOTICE
+  last_upgrade_date {
+    year: 2026
+    month: 10
+    day: 21
+  }
+  homepage: "https://fmt.dev"
+  identifier {
+    type: "Git"
+    value: "https://github.com/fmtlib/fmt"
+    version: "40626af"
+    closest_version: "11.2.0"
+  }
+}
