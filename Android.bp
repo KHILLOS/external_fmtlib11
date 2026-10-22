@@ -28,7 +28,7 @@ cc_defaults {
 }
 
 cc_library_headers {
-    name: "fmtlib11_headers",
+    name: "fmtlib_headers",
     export_include_dirs: ["include"],
     vendor_available: true,
     product_available: true,
@@ -47,6 +47,7 @@ cc_library_headers {
     },
     visibility: [
         "//external/spdlog",
+        "//system/libbase",
     ],
     min_sdk_version: "29",
     sdk_version: "current",
@@ -88,5 +89,6 @@ cc_library_static {
     stl: "c++_static",
     apex_available: [
         "//apex_available:platform",
+        "com.android.mediaprovider",
     ],
 }
